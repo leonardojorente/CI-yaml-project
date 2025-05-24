@@ -16,7 +16,7 @@ jobs:
     #passos do script de build
     steps:
       #clone do projeto
-      - uses: action/checkout@v4
+      - uses: actions/checkout@v4
         
       #instalacao do node
       - uses: action/setup-node@v4
