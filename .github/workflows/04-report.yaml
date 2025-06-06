@@ -3,7 +3,7 @@ name: 'playwright report'
 
 #regras de disparo(triggers)
 on: 
-  #gatilho de execucao manual: workflow_dispatch
+  #gatilho de execucao a partir de outro pipe: workflow_dispatch
   workflow_dispatch:
 
 # trabalhos e tarefas dentor do pipeline: jobs
