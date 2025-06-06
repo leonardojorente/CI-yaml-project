@@ -1,5 +1,5 @@
 # nome da pipeline
-name: 'playwright report'
+name: 'playwright post deploy exec'
 
 #regras de disparo(triggers)
 on: 
