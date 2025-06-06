@@ -5,7 +5,8 @@ name: 'playwright report'
 on: 
   #gatilho de execucao a partir de outro pipe: workflow_dispatch
   workflow_run:
-    workflows: ["Execucao Manual", "Execucao agendada"]
+    #workflows: ["Execucao Manual", "Execucao agendada"]
+    workflows: ["Execucao Manual"]
     types: 
       - completed
 
