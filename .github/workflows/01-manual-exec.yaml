@@ -2,7 +2,7 @@
 name: 'Execucao Manual'
 
 #regras de disparo(triggers)
-on: 
+on:
   #gatilho de execucao manual: workflow_dispatch
   workflow_dispatch:
 
@@ -17,10 +17,10 @@ jobs:
     steps:
       #clone do projeto
       - uses: actions/checkout@v4
-        
+
       #instalacao do node
       - uses: actions/setup-node@v4
-        with: 
+        with:
           node-version: 22.x
 
       #instalacao do yarn

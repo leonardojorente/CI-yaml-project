@@ -2,7 +2,7 @@
 name: 'playwright report'
 
 #regras de disparo(triggers)
-on: 
+on:
   #gatilho de execucao a partir de outro pipe: workflow_dispatch
   workflow_dispatch:
 
@@ -17,10 +17,10 @@ jobs:
     steps:
       #clone do projeto
       - uses: actions/checkout@v4
-        
+
       #instalacao do node
       - uses: actions/setup-node@v4
-        with: 
+        with:
           node-version: 22.x
 
       #instalacao do yarn
@@ -39,8 +39,8 @@ jobs:
       - name: Executando testes e2e
         run: yarn run e2e
 
-      - uses: actions/upload-artifact@v4  # upload test results
-        if: ${{ !cancelled() }}           # run this step even if previous step failed
+      - uses: actions/upload-artifact@v4 # upload test results
+        if: ${{ !cancelled() }} # run this step even if previous step failed
         with:
           name: test-results
           path: playwright-report/index.html

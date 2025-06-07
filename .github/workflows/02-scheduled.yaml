@@ -2,7 +2,7 @@
 name: 'Execucao agendada'
 
 #regras de disparo(triggers)
-on: 
+on:
   #gatilho de agendamento: schedule
   #https://crontab.guru/#0_6_*_*_1
   #a - minuto
@@ -11,7 +11,7 @@ on:
   #d - mês
   #e - dia da semana
   #rodar o regressivo toda segunda-feira pela manhã
-  #'cron' 
+  #'cron'
   #a b c d e
   #0 6 * * 1
   schedule:
@@ -28,10 +28,10 @@ jobs:
     steps:
       #clone do projeto
       - uses: actions/checkout@v4
-        
+
       #instalacao do node
       - uses: actions/setup-node@v4
-        with: 
+        with:
           node-version: 22.x
 
       #instalacao do yarn
