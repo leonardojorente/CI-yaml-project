@@ -16,6 +16,8 @@ jobs:
     # available images https://github.com/actions/runner-images
     # maquina que o job vai executar
     runs-on: ubuntu-latest
+    
+    #condicao de execucao do job
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     #passos do script de build
