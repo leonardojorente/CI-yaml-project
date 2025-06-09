@@ -54,6 +54,7 @@ jobs:
   #https://github.com/leonardojorente/CI-yaml-project/settings/pages -> enable pages on github
   #https://leonardojorente.github.io/CI-yaml-project/
   deploy-to-gh-pages:
+    needs: e2e-tests
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
