@@ -6,15 +6,15 @@ on:
   #gatilho de execucao a partir de outro pipe: workflow_dispatch
   workflow_dispatch:
 
-permissions:
-  pages: write
-  id-token: write
-
 # trabalhos e tarefas dentor do pipeline: jobs
 jobs:
   e2e-tests:
     # available images https://github.com/actions/runner-images
     # maquina que o job vai executar
+    permissions:
+      pages: write
+      id-token: write
+      
     runs-on: ubuntu-latest
     environment:
       name: github-pages
