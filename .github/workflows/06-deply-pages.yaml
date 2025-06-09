@@ -51,10 +51,10 @@ jobs:
       - name: configure to GitHub Pages
         uses: actions/configure-pages@v4
       - name: upload artifacts to GitHub Pages
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           #based on where the report was generated checking the upload artifact step
           path: playwright-report
       - name: deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
