@@ -43,18 +43,29 @@ jobs:
         if: ${{ always() }}
         with:
           name: test-results
-          path: playwright-report/index.html
+          path: playwright-report/
 
-      # Deploy to GitHub Pages
-      #https://github.com/actions/deploy-pages
-      #https://github.com/leonardojorente/CI-yaml-project/settings/pages -> enable pages on github
-      - name: configure to GitHub Pages
-        uses: actions/configure-pages@v4
-      - name: upload artifacts to GitHub Pages
-        uses: actions/upload-pages-artifact@v3
+  # Deploy to GitHub Pages
+  #https://github.com/actions/deploy-pages
+  #https://github.com/leonardojorente/CI-yaml-project/settings/pages -> enable pages on github
+  deploy-to-gh-pages:
+    needs: e2e-tests
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download Report Artifact
+        uses: actions/download-artifact@v4
         with:
-          #based on where the report was generated checking the upload artifact step
+          name: playwright-report
           path: playwright-report
-      - name: deploy to GitHub Pages
+
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: playwright-report
