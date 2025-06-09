@@ -6,6 +6,10 @@ on:
   #gatilho de execucao a partir de outro pipe: workflow_dispatch
   workflow_dispatch:
 
+permissions:
+  pages: write
+  id-token: write
+
 # trabalhos e tarefas dentor do pipeline: jobs
 jobs:
   e2e-tests:
@@ -48,24 +52,22 @@ jobs:
   # Deploy to GitHub Pages
   #https://github.com/actions/deploy-pages
   #https://github.com/leonardojorente/CI-yaml-project/settings/pages -> enable pages on github
+  #https://leonardojorente.github.io/CI-yaml-project/
   deploy-to-gh-pages:
-    needs: e2e-tests
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
-      - name: Download Report Artifact
-        uses: actions/download-artifact@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: playwright-report
-          path: playwright-report
-
+          # Upload entire repository
+          path: playwright-report/
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          artifact_name: playwright-report
