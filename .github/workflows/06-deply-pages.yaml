@@ -49,7 +49,7 @@ jobs:
         if: ${{ always() }}
         with:
           name: test-results
-          path: playwright-report/index.html
+          path: playwright-report/
 
         # Deploy to GitHub Pages
         #https://github.com/actions/deploy-pages
@@ -59,7 +59,7 @@ jobs:
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: playwright-report/index.html
+          path: playwright-report/
 
       - name: Deploy to GitHub Pages
         id: deployment
