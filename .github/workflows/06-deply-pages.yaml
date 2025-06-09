@@ -16,7 +16,9 @@ jobs:
     # available images https://github.com/actions/runner-images
     # maquina que o job vai executar
     runs-on: ubuntu-latest
-
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     #passos do script de build
     steps:
       #clone do projeto
@@ -49,10 +51,21 @@ jobs:
           name: test-results
           path: playwright-report/
 
-  # Deploy to GitHub Pages
-  #https://github.com/actions/deploy-pages
-  #https://github.com/leonardojorente/CI-yaml-project/settings/pages -> enable pages on github
-  #https://leonardojorente.github.io/CI-yaml-project/
+        # Deploy to GitHub Pages
+        #https://github.com/actions/deploy-pages
+        #https://github.com/leonardojorente/CI-yaml-project/settings/pages -> enable pages on github
+        #https://leonardojorente.github.io/CI-yaml-project/    
+      - uses: actions/configure-pages@v5 # upload test results
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: playwright-report/
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4          
+
+
   deploy-to-gh-pages:
     needs: e2e-tests
     environment:
@@ -67,7 +80,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
           path: playwright-report/
       - name: Deploy to GitHub Pages
         id: deployment
